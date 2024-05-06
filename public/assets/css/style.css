@@ -1,0 +1,279 @@
+/* Style pour le conteneur principal */
+
+.container {
+    width: 555px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+#filters-form {
+    margin-left: 184px;
+}
+
+/* Style pour chaque carte */
+.card {
+    width: 70%;
+    margin-left: 167px;
+    margin-bottom: 20px;
+
+    padding: 20px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    /* Centrer le contenu horizontalement */
+    text-align: center;
+}
+
+/* input[type="text"] {
+    
+    border-radius: 6px;
+    width: 215px;
+    border-color: rgb(200, 226, 226);
+    padding: 5px;
+    color: azure;
+    font-family: "Roboto Mono", monospace;
+} */
+.custom-thead th {
+    background-color: #c5c4c4;
+}
+/* 2 eme card */
+.subb-card {
+    display: flex;
+    gap: 10px;
+}
+.main-card {
+    display: flex;
+    height: 320px;
+}
+.titre {
+    text-align: left;
+    font-size: 24px;
+    color: rgb(92, 79, 62);
+}
+.titreterme{
+    color: #534d40;
+    font-weight: bold;
+    font-size: 14px;
+}
+hr {
+    border: none; /* Supprime la bordure par défaut */
+    height: 3px; /* Épaisseur du trait */
+    background-color: #333; /* Couleur du trait */
+    width: 100px; /* Largeur du trait */
+    margin: 20px ; /* Centre le trait horizontalement et ajoute un espace vertical */
+}
+.termes{
+    color: #716b60;
+    font-weight: bold;
+    font-size: 12px;
+    margin: 10px ;
+}
+.button-container {
+    text-align: center;
+    margin-top: 20px; /* Espacement au-dessus des boutons */
+    margin-bottom: 20px;
+}
+
+.dropzone {
+    box-shadow: 0px 2px 20px 0px #f2f2f2;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #fbfdff;
+}
+
+
+
+.dropzone-previews {
+    border: 2px dashed #c9c9ca;
+    border-radius: 5px;
+    background: #f9f9f9;
+    padding: 70px;
+    width: 100%;
+}
+
+
+.button-container button {
+    
+    background-color: #fcfcfc; /* Bleu clair par défaut */
+    border: 1px solid #8fceff;
+    padding: 7px 10px;
+    margin: 0 -2px; /* Réduire l'espacement entre les boutons */
+    cursor: pointer;
+}
+
+.button-container button:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.button-container button:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.button-container button.clicked {
+    background-color: #8fceff; /* Bleu foncé lorsque cliqué */
+}
+
+.content {
+    /* Styles pour le contenu, si nécessaire */
+}
+
+
+h3 {
+    text-align: left;
+    font-size: 16px;
+    color: rgb(92, 79, 62);
+}
+
+.sub-card {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    height: 250px;
+    overflow: hidden;
+    flex: 0 1 auto;
+    min-width: 100px;
+    width: 190px;
+    text-align: center;
+}
+.form-control {
+    width: 400px; /* Cela garantit que l'input prend la pleine largeur de son conteneur parent */
+    box-sizing: border-box; /* S'assure que les paddings et borders sont inclus dans la largeur totale */
+}
+.observation{
+    display: flex;
+}
+/* .fa-star {
+    color: rgb(12, 52, 174) 
+} */
+@media screen and (max-width: 768px) {
+    .pagination-container {
+        display: none;
+    }
+    #graphique1{
+        height: 140px;
+    }
+    canvas {
+        width: 100%;
+        height: 130px;
+        min-height: 130px;
+    }
+    /* .sub-card {
+        background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
+        height: auto;  
+        width: 100%;
+        flex: 0 1 auto;      
+        text-align: center;
+        margin-top: 10px;
+       
+        
+    }
+    .subb-card {
+        display: block;
+        gap: 10px;
+        
+    } */
+   
+
+    .observation{
+        display: block;
+    }
+   
+    
+    .article-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #fff;
+    }
+    .responsive-table {
+        display: none;
+    }
+    #traficContent ,
+    #notesContent {
+        /* Modifier les propriétés CSS pour les petits écrans */
+        /* Par exemple : */
+        height: auto;
+        margin-top: 10px;
+        box-shadow: none;
+    }
+ 
+    .mes-compagnes-section {
+        display: none;
+    }
+   
+  
+}
+.table-responsive .table th {
+    white-space: nowrap;
+}
+.titree{
+    font-size: large;
+    font-weight: bold;
+    
+}
+
+.table-responsive {
+    display: block;
+}
+
+@media screen and (min-width: 768px) {
+    #compagnesection{
+        display: none;
+    }
+}
+ @media screen and (max-width: 992px){
+    .card {
+        width: 100%;
+        height: 100%;
+        margin-left: 0;
+        margin-bottom: 20px;
+    
+        padding: 20px;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+       
+        text-align: center;
+    }
+} 
+ 
+.swiper-button-prev, .swiper-button-next {
+    
+    color: #fff; /* White arrow color */
+    border-radius: 50%; /* Fully rounded button */
+    padding: 10px; /* Adequate clickable area */
+    opacity: 0.5; /* More visible */
+    width: 30px; /* Reasonable width for the button */
+    height: 30px; /* Reasonable height for the button */
+    transform: translate(0, -50%);
+    position: absolute;
+    top: 50%;
+}
+
+.swiper-button-prev::after, .swiper-button-next::after {
+    font-size: 14px; /* Adjust arrow size to fit within the button */
+}
+
+.swiper-button-prev:hover, .swiper-button-next:hover {
+    opacity: 0.2; 
+}
+.deleg{
+    text-align: center;
+    font-size: 40px;
+    color: rgb(25, 131, 218);
+    font-weight: 700;
+}
+
+
+
+
+
+

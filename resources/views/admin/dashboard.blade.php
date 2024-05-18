@@ -53,7 +53,7 @@
                         <th>Objectif</th>
                         <th>Réseaux</th>
                         <th>Détails</th>
-                        <th>Photo</th>
+                        {{-- <th>Photo</th> --}}
                         <th>Status</th>
                         <th>Action</th>
                     </tr>
@@ -67,7 +67,7 @@
                             <td>{{ $compagne->objectif }}</td>
                             <td>{{ $compagne->reseaux }}</td>
                             <td>{{ $compagne->details }}</td>
-                            <td>
+                            {{-- <td>
                                 @if ($compagne->images->isNotEmpty())
                                     @foreach ($compagne->images as $image)
                                         <img src="{{ Storage::url($image->filename) }}" alt="Photo de campagne"
@@ -76,7 +76,7 @@
                                 @else
                                     Aucune photo disponible
                                 @endif
-                            </td>
+                            </td> --}}
                             <td>{{ $compagne->status }}</td>
                             <td>
                                 <a href="{{ route('edit-compagne', $compagne->id) }}" class="btn "
@@ -129,11 +129,11 @@
                 if (isUser) {
                     return `
                         <div class="user-details">
-                            <div>Client: ${item.name}</div>
-                            <div>Mail: ${item.email}</div>
-                            <div>Abonnement: ${item.abonnement}</div>
-                            <div>Téléphone: ${item.telephone}</div>
-                            <div>Mot de passe: **********</div>
+                            <div>${item.name}</div>
+                            
+                            <div>${item.abonnement}</div>
+                            
+                            
                         </div>
                         <div class="user-actions">
                             <a href="users/edit/${item.id}" class="btn" style="background-color: #268EE6; color: white; border: none; cursor: pointer;">Voir</a>
@@ -142,12 +142,10 @@
                 } else {
                     return `
                         <div class="campaign-details">
-                            <div>Date Début: ${item.date_debut}</div>
-                            <div>Date Fin: ${item.date_fin}</div>
-                            <div>Objectif: ${item.objectif}</div>
-                            <div>Réseaux: ${item.reseaux}</div>
-                            <div>Détails: ${item.details}</div>
-                            <div>Status: ${item.status}</div>
+                            <div> ${item.date_debut}</div>
+                            
+                            <div>${item.objectif}</div>
+                            
                         </div>
                         <div class="campaign-actions">
                             <a href="edit-compagne/${item.id}" class="btn" style="background-color: #268EE6; color: white; border: none; cursor: pointer;">Éditer</a>

@@ -78,14 +78,16 @@ Route::get('/dashboard', [ChartController::class, 'afficherGraphique'])->name('d
 // creation et modification utilisateur
 Route::get('/utilisateur/create', [AdminController::class, 'create'])->name('utilisateur.create');
 Route::post('/utilisateur/store', [AdminController::class, 'storeAdmin'])->name('utilisateur.store');
-
+Route::delete('/delete_image/{id}', [UserController::class, 'deleteimage'])->name('delete-image');
 // creation et modification compagnes admin
 Route::get('/compagnes/edit/{id}', [AdminController::class, 'editCompagne'])->name('edit-compagne');
-Route::post('/compagnes/update/{id}', [AdminController::class, 'updateCompagne'])->name('update-compagne');
+Route::put('/compagnes/update/{id}', [AdminController::class, 'updateCompagne'])->name('update-compagne');
 
 
 Route::get('/users/{user}/edit', [AdminController::class, 'edit'])->name('users.edit');
 Route::put('/users/{user}', [AdminController::class, 'update'])->name('users.update');
+Route::delete('/delete_images/{id}', [AdminController::class, 'deleteimages'])->name('delete-images');
+
 
 
 

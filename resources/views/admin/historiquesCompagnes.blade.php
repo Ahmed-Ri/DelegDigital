@@ -30,7 +30,7 @@
                             <th>Objectif</th>
                             <th>Réseaux</th>
                             <th>Détails</th>
-                            <th>Photo</th>
+                            {{-- <th>Photo</th> --}}
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -45,14 +45,14 @@
                                 <td>{{ $compagne->objectif }}</td>
                                 <td>{{ $compagne->reseaux }}</td>
                                 <td>{{ $compagne->details }}</td>
-                                <td>
+                                {{-- <td>
                                     @if ($compagne->photo)
                                         <img src="{{ asset($compagne->photo) }}"
                                             alt="Photo"style="width: 50px; height: 50px;">
                                     @else
                                         Aucune photo disponible
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td>{{ $compagne->status }}</td>
                                 <td>
                                     <a href="{{ route('edit-compagne', $compagne->id) }}" class="btn" style="background-color: #268EE6; color: white; border: none;  cursor: pointer;">Éditer</a>

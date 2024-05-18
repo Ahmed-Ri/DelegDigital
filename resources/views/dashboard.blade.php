@@ -10,6 +10,7 @@
             height: auto;
             margin-top: 20px;
         }
+
         .swiper-slide {
             text-align: center;
             display: flex;
@@ -17,21 +18,27 @@
             align-items: center;
             flex-direction: column;
         }
+
         .sub-card {
             width: 100%;
-            max-width: 180px; /* Controls the max size of the cards */
+            max-width: 180px;
+            /* Controls the max size of the cards */
             margin: auto;
         }
+
         .d-flex {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .rating-number, .stars {
+
+        .rating-number,
+        .stars {
             margin-left: 2px;
             margin-right: 2px;
             font-size: 14px;
         }
+
         .sub-card img {
             width: 180px;
             height: 180px;
@@ -40,13 +47,13 @@
 
 
     <div class="container ">
-<div id="compagnesection">
-    <div class="d-flex justify-content-start" >
-        <div class="titree">Bonjour {{ $users->name }} </div>
-    <img src="/assets/image/Slt.png" style="width: 30px; height: 30px;" alt="">
-    </div>
-   <div style="color: #c2c2c2;">Entreprise {{ $users->entreprise }}</div>
-</div>
+        <div id="compagnesection">
+            <div class="d-flex justify-content-start">
+                <div class="titree">Bonjour {{ $users->name }} </div>
+                <img src="/assets/image/Slt.png" style="width: 30px; height: 30px;" alt="">
+            </div>
+            <div style="color: #c2c2c2;">Entreprise {{ $users->entreprise }}</div>
+        </div>
         <div class="card mx-auto mt-4">
             <h2 class="titre mb-2">Mes pages</h2>
             <div class="swiper mySwiper">
@@ -55,7 +62,8 @@
                     <div class="swiper-slide">
                         <div class="sub-card">
                             <div class="mb-2 mt-2 d-flex align-items-center justify-content-center">
-                                <img src="/assets/image/facebook.png" alt="Icon" style="width: 20px; height: 20px; vertical-align: middle;">
+                                <img src="/assets/image/facebook.png" alt="Icon"
+                                    style="width: 20px; height: 20px; vertical-align: middle;">
                                 <strong class="rating-number">{{ $derniereNoteFacebook }}</strong>
                                 <span class="stars" data-rating="{{ $derniereNoteFacebook }}"></span>
                                 <strong style="font-size: 14px;">({{ $Commentaire_facebook }})</strong>
@@ -69,7 +77,8 @@
                     <div class="swiper-slide">
                         <div class="sub-card">
                             <div class="mb-2 mt-2 d-flex align-items-center justify-content-center">
-                                <img src="/assets/image/web.png" alt="Icon" style="width: 20px; height: 20px; vertical-align: middle;">
+                                <img src="/assets/image/web.png" alt="Icon"
+                                    style="width: 20px; height: 20px; vertical-align: middle;">
                                 <strong class="rating-number">{{ $derniereNoteInstagram }}</strong>
                                 <span class="stars" data-rating="{{ $derniereNoteInstagram }}"></span>
                                 <strong style="font-size: 14px;">({{ $Commentaire_instagram }})</strong>
@@ -83,7 +92,8 @@
                     <div class="swiper-slide">
                         <div class="sub-card">
                             <div class="mb-2 mt-2 d-flex align-items-center justify-content-center">
-                                <img src="/assets/image/google.png" alt="Icon" style="width: 20px; height: 20px; vertical-align: middle;">
+                                <img src="/assets/image/google.png" alt="Icon"
+                                    style="width: 20px; height: 20px; vertical-align: middle;">
                                 <strong class="rating-number">{{ $derniereNoteGoogle }}</strong>
                                 <span class="stars" data-rating="{{ $derniereNoteGoogle }}"></span>
                                 <strong style="font-size: 14px;">({{ $Commentaire_google }})</strong>
@@ -97,7 +107,8 @@
                     <div class="swiper-slide">
                         <div class="sub-card">
                             <div class="mb-2 mt-2 d-flex align-items-center justify-content-center">
-                                <img src="/assets/image/instagram.png" alt="Icon" style="width: 20px; height: 20px; vertical-align: middle;">
+                                <img src="/assets/image/instagram.png" alt="Icon"
+                                    style="width: 20px; height: 20px; vertical-align: middle;">
                                 <strong class="rating-number">{{ $derniereNoteSite }}</strong>
                                 <span class="stars" data-rating="{{ $derniereNoteSite }}"></span>
                                 <strong style="font-size: 14px;">({{ $Commentaire_site }})</strong>
@@ -121,33 +132,26 @@
                 <input class="dateInput my-3" type="text" name="daterange" value="01/12/2024 - 31/12/2024" />
             </form>
         </div> --}}
+
         <div class="card">
-<h2 class="titre ">Mes indicateurs</h2>
+            <h2 class="titre">Mes indicateurs</h2>
             <div class="button-container">
                 <button onclick="showContent('trafic')">Visites</button>
                 <button onclick="showContent('notes')">Notes</button>
                 <button onclick="showContent('requetes')">Termes</button>
             </div>
-        </div>
-
-        <div >
-            <div id="traficContent" class="content" style="display: none;">
-                <div style=" position: relative; flex: 1; padding: 10px; margin-top: 20px; box-shadow: 1px 2px 4px 1px rgba(0,0,0,0.2);"
-                    class="card  mx-auto">
-                    <canvas id="graphique1" style="width: 100%; height: 130px;"></canvas>
+        
+            <div style="margin-top: 20px; box-shadow: 1px 2px 4px 1px rgba(0,0,0,0.2);">
+                <div id="traficContent" class="content" style="display: none; padding: 10px;">
+                    <canvas id="graphique1"></canvas>
                 </div>
-            </div>
-
-            <div id="notesContent" class="content" style="display: none; ">
-                <div style="position: relative; flex: 1; padding: 10px; margin-top: 20px; box-shadow: 1px 2px 4px 1px rgba(0,0,0,0.2);"
-                    class="card  mx-auto">
-                    <canvas id="graphique2" style="width: 100%; height: 130px;"></canvas>
+        
+                <div id="notesContent" class="content" style="display: none; padding: 10px;">
+                    <canvas id="graphique2"></canvas>
                 </div>
-            </div>
-
-            <div id="requetesContent" class="content" style="display: none;">
-                <div class="card  mx-auto mt-4"style="text-align: left;">
-                    <h2 class="titreterme mb-2 ">Requete les plus fréquent</h2>
+        
+                <div id="requetesContent" class="content" style="display: none; padding: 10px;">
+                    <h2 class="titreterme mb-2">Requete les plus fréquent</h2>
                     <div>
                         @foreach ($termsArray as $index => $term)
                             <p class="termes">{{ $term }}</p>
@@ -159,10 +163,11 @@
                 </div>
             </div>
         </div>
-        <div class="mes-compagnes-section">
-            <div class="card mx-auto mt-2 ">
-                <div class="d-flex justify-content-between align-items-center">
-                    <h2 class=" titre m-3 ">Mes compagnes</h2>
+        
+        
+            <div class="card mx-auto mt-2 mes-compagnes-section">
+                <div class="d-flex justify-content-between align-items-center mb-5">
+                    <h2 class=" titre  ">Mes compagnes</h2>
                     <div>
                         <a href="{{ route('formulaire') }}" class="btn mr-2"
                             style="background-color: #268EE6; color: white; border: none;  cursor: pointer;">+Nouveau</a>
@@ -259,21 +264,28 @@
                                 </div>
 
 
-                                <div class="form-group row">
+                                <div class="form-group row images-container">
                                     <label for="details"
                                         class="col-sm-4 col-form-label fw-bold text-start">Photos</label>
                                     {{-- Section pour afficher les images téléchargées --}}
                                     @if ($derniereImages->isNotEmpty())
-                                        <div style="display: flex; flex-wrap: wrap; justify-content: flex-end;">
-                                            @foreach ($derniereImages as $image)
-                                                <img src="{{ Storage::url($image->filename) }}" alt="Image"
-                                                    style="width: 100px; height: 100px; margin: 10px;">
-                                            @endforeach
+                                        <div class="col-sm-8">
+                                            <div style="border: 2px dotted #ccc; padding: 10px;">
+                                                <div
+                                                    style="display: flex; flex-wrap: wrap; justify-content: flex-end;">
+                                                    @foreach ($derniereImages as $image)
+                                                        <img src="{{ Storage::url($image->filename) }}"
+                                                            alt="Image"
+                                                            style="width: 100px; height: 100px; margin: 10px;">
+                                                    @endforeach
+                                                </div>
+                                            </div>
                                         </div>
                                     @else
                                         {{-- <p>Aucune image disponible pour cette campagne.</p> --}}
                                     @endif
                                 </div>
+
                             </form>
                         </div>
                         <div class="col-md-4">
@@ -284,11 +296,11 @@
                     {{-- <p>Aucune campagne récente trouvée.</p> --}}
                 @endif
             </div>
-        </div>
+        
         <div class="card mx-auto mt-3 " id="compagnesection">
             <h2 class="titre mb-4">Ma compagne en cours</h2>
             <div class="form-group row">
-               
+
                 <div class="col-sm-8">
                     <select class="form-control" id="objectif" name="objectif" disabled>
                         <option value="fidelisation"
@@ -297,48 +309,48 @@
                         <option value="visibilite"
                             {{ $derniereCompagne->objectif == 'visibilite' ? 'selected' : '' }}>
                             Visibilité</option>
-                        <option value="notoriete"
-                            {{ $derniereCompagne->objectif == 'notoriete' ? 'selected' : '' }}>
+                        <option value="notoriete" {{ $derniereCompagne->objectif == 'notoriete' ? 'selected' : '' }}>
                             Notoriété</option>
                     </select>
                 </div>
             </div>
             <div class="form-group row">
-               
+
                 <div class="col-sm-8">
                     <input type="date" class="form-control" id="date_debut" name="date_debut"
                         value="{{ $derniereCompagne->date_debut ?? '' }}" disabled>
                 </div>
             </div>
-                {{-- Champ Détails --}}
-                <div class="form-group row">
-                    
-                    <div class="col-sm-8">
-                        <textarea class="form-control" id="details" name="details" rows="8" disabled>{{ $derniereCompagne->details ?? '' }}</textarea>
+            {{-- Champ Détails --}}
+            <div class="form-group row">
+
+                <div class="col-sm-8">
+                    <textarea class="form-control" id="details" name="details" rows="8" disabled>{{ $derniereCompagne->details ?? '' }}</textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+
+                {{-- Section pour afficher les images téléchargées --}}
+                @if ($derniereImages->isNotEmpty())
+                    <div style="display: flex; flex-wrap: wrap; justify-content: flex-end;">
+                        @foreach ($derniereImages as $image)
+                            <img src="{{ Storage::url($image->filename) }}" alt="Image"
+                                style="width: 100px; height: 100px; margin: 10px;">
+                        @endforeach
                     </div>
-                </div>
-                <div class="form-group row">
-                    
-                    {{-- Section pour afficher les images téléchargées --}}
-                    @if ($derniereImages->isNotEmpty())
-                        <div style="display: flex; flex-wrap: wrap; justify-content: flex-end;">
-                            @foreach ($derniereImages as $image)
-                                <img src="{{ Storage::url($image->filename) }}" alt="Image"
-                                    style="width: 100px; height: 100px; margin: 10px;">
-                            @endforeach
-                        </div>
-                    @else
-                        <p></p>
-                    @endif
-                </div>
+                @else
+                    <p></p>
+                @endif
+            </div>
             <div class="d-flex justify-content-end align-items-center">
                 <div class="compagne">
-                    <a href="{{ route('formulaire') }}" class="btn mt-2" style="background-color: #268EE6; color: white; border: none; cursor: pointer;">+Nouveau</a>
+                    <a href="{{ route('formulaire') }}" class="btn mt-2"
+                        style="background-color: #268EE6; color: white; border: none; cursor: pointer;">+Nouveau</a>
                     <a href="{{ route('historique') }}" class="btn btn-outline-primary mt-2">Historique</a>
                 </div>
             </div>
         </div>
-        
+
         <div class="card  mx-auto mt-2">
             <h2 class="titre mb-2">Observations de l'expert</h2>
             <h3>Mise à jour du : {{ $Dates }} </h3>
@@ -361,27 +373,26 @@
 
 
     <script>
-       
         var mySwiper = new Swiper('.mySwiper', {
-        direction: 'horizontal',
-        loop: true,
-        slidesPerView: 1,
-        spaceBetween: 30,
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        breakpoints: {
-            768: {
-                slidesPerView: 3,
-                spaceBetween: -40
+            direction: 'horizontal',
+            loop: true,
+            slidesPerView: 1,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: -40
+                }
             }
-        }
-    });
+        });
         document.addEventListener("DOMContentLoaded", function() {
             var stars = document.querySelectorAll('.stars');
             stars.forEach(function(star) {
@@ -459,37 +470,7 @@
         });
 
 
-        function adjustStylesForMobile() {
-        var traficContent = document.getElementById('traficContent');
-        var notesContent = document.getElementById('notesContent');
-
-        // Vérifie si la largeur de l'écran est inférieure ou égale à 720px
-        if (window.innerWidth <= 720) {
-            // Styles pour les écrans plus petits
-            traficContent.style.flexDirection = 'column';
-            traficContent.style.width = '100%';
-            traficContent.style.height = '300px';
-
-            notesContent.style.flexDirection = 'column';
-            notesContent.style.width = '100%';
-            notesContent.style.height = '300px';
-        } else {
-            // Styles pour les écrans plus larges
-            traficContent.style.flexDirection = 'row';
-            traficContent.style.width = '1100px';
-            traficContent.style.height = 'auto';
-
-            notesContent.style.flexDirection = 'row';
-            notesContent.style.width = '1100px';
-            notesContent.style.height = 'auto';
-        }
-    }
-
-    // Ajuster les styles lors du chargement initial
-    adjustStylesForMobile();
-
-    // Ajuster les styles lors du redimensionnement de la fenêtre
-    window.onresize = adjustStylesForMobile;
+        
         // Assurez-vous que Chart.js est chargé dans votre page avant ce script
         var ctx = document.getElementById('graphique1').getContext('2d');
         new Chart(ctx, {
@@ -546,13 +527,10 @@
                         text: 'Performance du Trafic ',
                     }
                 },
-                animation: {
-                    duration: 2000,
-                    easing: 'easeInOutQuad',
-                }
+               
             },
         });
-        
+
         var ctx = document.getElementById('graphique2').getContext('2d');
         new Chart(ctx, {
             type: 'line', // Type de graphique en ligne
@@ -608,10 +586,7 @@
                         text: 'Performance du Notes',
                     }
                 },
-                animation: {
-                    duration: 2000,
-                    easing: 'easeInOutQuad',
-                }
+               
             },
         });
 
@@ -624,7 +599,7 @@
             // Afficher le contenu correspondant au type sélectionné
             document.getElementById(type + 'Content').style.display = 'block';
         }
-       
+
 
 
         function showContent(type) {
@@ -646,6 +621,38 @@
             // Mettre en surbrillance le bouton cliqué
             event.currentTarget.classList.add('clicked');
         }
+
+        function adjustStylesForMobile() {
+            var traficContent = document.getElementById('traficContent');
+            var notesContent = document.getElementById('notesContent');
+
+            // Vérifie si la largeur de l'écran est inférieure ou égale à 720px
+            if (window.innerWidth <= 720) {
+                // Styles pour les écrans plus petits
+                traficContent.style.flexDirection = 'column';
+                traficContent.style.width = '100%';
+                traficContent.style.height = 'auto';
+
+                notesContent.style.flexDirection = 'column';
+                notesContent.style.width = '100%';
+                notesContent.style.height = 'auto';
+            } else {
+                // Styles pour les écrans plus larges
+                traficContent.style.flexDirection = 'row';
+                traficContent.style.width = '100%';
+                traficContent.style.height = 'auto';
+
+                notesContent.style.flexDirection = 'row';
+                notesContent.style.width = '100%';
+                notesContent.style.height = 'auto';
+            }
+        }
+
+        // Ajuster les styles lors du chargement initial
+        adjustStylesForMobile();
+
+        // Ajuster les styles lors du redimensionnement de la fenêtre
+        window.onresize = adjustStylesForMobile;
     </script>
 
 

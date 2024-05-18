@@ -119,12 +119,6 @@ public function updateCompagne(Request $request, $id)
 
     // Gestion des fichiers images
     if ($request->hasFile('files')) {
-        // Suppression des anciens fichiers si nécessaire
-        foreach ($compagne->images as $image) {
-            Storage::delete('public/' . $image->filename);
-            $image->delete();
-        }
-
         // Ajout des nouveaux fichiers
         foreach ($request->file('files') as $file) {
             $filename = $file->store('images', 'public');

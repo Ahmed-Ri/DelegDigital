@@ -10,7 +10,7 @@
                     <th>Objectif</th>
                     <th>Réseaux</th>
                     <th>Détails</th>
-                    <th>Photo</th>
+                    {{-- <th>Photo</th> --}}
                     <th>Status</th>
 
                     <th>Action</th>
@@ -24,7 +24,7 @@
                         <td>{{ $compagne->objectif }}</td>
                         <td>{{ $compagne->reseaux }}</td>
                         <td>{{ $compagne->details }}</td>
-                        <td>
+                        {{-- <td>
                             @if ($compagne->images->isNotEmpty())
                                 @foreach ($compagne->images as $image)
                                     <img src="{{ Storage::url($image->filename) }}" alt="Photo de campagne"
@@ -33,7 +33,7 @@
                             @else
                                 Aucune photo disponible
                             @endif
-                        </td>
+                        </td> --}}
                         <td>{{ $compagne->status }}</td>
                         <td>
                             <a href="{{ route('edit_form', $compagne->id) }}" class="btn"
@@ -80,12 +80,8 @@
                         card.innerHTML = `
                         
                             <div class="campaign-details">
-                                <div>Date Début: ${compagne.date_debut}</div>
-                                <div>Date Fin: ${compagne.date_fin}</div>
-                                <div>Objectif: ${compagne.objectif}</div>
-                                <div>Réseaux: ${compagne.reseaux}</div>
-                                <div>Détails: ${compagne.details}</div>
-                                <div>Status: ${compagne.status}</div>
+                                <div>${compagne.date_debut}</div>                               
+                                <div>${compagne.objectif}</div>                              
                             </div>
                             <div class="campaign-actions">
                                 <a href="/formulaire/edit/${compagne.id}" class="btn" style="background-color: #268EE6; color: white; border: none; cursor: pointer;">Éditer</a>

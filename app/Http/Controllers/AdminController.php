@@ -35,49 +35,52 @@ public function editCompagne($id)
     
     public function updateCompagne(Request $request, $id)
     {
-        $request->validate([
-            'date_debut' => 'required|date',
-            'date_fin' => 'required|date',
-            'status' => 'required|string',
-            'objectif' => 'required|string',
-            'reseaux' => 'required|string',
-            'details' => 'nullable|string',
-            'files.*' => 'sometimes|file|image|max:5000', // Validation pour les fichiers images
-        ]);
-    
-        // Récupération de la campagne
-        $compagne = Compagne::findOrFail($id);
-    
-        // Mise à jour des champs de la campagne
-        $compagne->date_debut = $request->input('date_debut');
-        $compagne->date_fin = $request->input('date_fin');
-        $compagne->status = $request->input('status');
-        $compagne->objectif = $request->input('objectif');
-        $compagne->reseaux = $request->input('reseaux');
-        $compagne->details = $request->input('details');
-        $compagne->save();
-    
-        // Gestion des fichiers images
-        if ($request->hasFile('files')) {
-            // Suppression des anciens fichiers si nécessaire
-            foreach ($compagne->images as $image) {
-                Storage::delete('public/' . $image->filename);
-                $image->delete();
-            }
-    
-            // Ajout des nouveaux fichiers
-            foreach ($request->file('files') as $file) {
-                $filename = $file->store('images', 'public');
-                $image = new ImageUpload();
-                $image->filename = $filename;
-                $image->compagne_id = $compagne->id;
-                $image->save();
-            }
+        
+         // Validation des entrées
+    $request->validate([
+        'date_debut' => 'required|date',
+        'date_fin' => 'required|date',
+        'status' => 'required|string',
+        'objectif' => 'required|string',
+        'reseaux' => 'required|string',
+        'details' => 'nullable|string',
+        'files.*' => 'sometimes|file|image|max:5000', // Validation pour les fichiers images
+    ]);
+
+    // Récupération de la campagne
+    $compagne = Compagne::findOrFail($id);
+
+    // Mise à jour des champs de la campagne
+    $compagne->date_debut = $request->input('date_debut');
+    $compagne->date_fin = $request->input('date_fin');
+    $compagne->status = $request->input('status');
+    $compagne->objectif = $request->input('objectif');
+    $compagne->reseaux = $request->input('reseaux');
+    $compagne->details = $request->input('details');
+    $compagne->save();
+
+    // Gestion des fichiers images
+    if ($request->hasFile('files')) {
+        // Ajout des nouveaux fichiers
+        foreach ($request->file('files') as $file) {
+            $filename = $file->store('images', 'public');
+            $image = new ImageUpload();
+            $image->filename = $filename;
+            $image->compagne_id = $compagne->id;
+            $image->save();
         }
+    }
     return redirect()->route('admin.dashboard')->with('success', 'Informations de l\'utilisateur mises à jour avec succès.');
 }
 
+public function deleteimages($id)
+{
+    $image = ImageUpload::findOrFail($id);
+    Storage::delete($image->filename); // Supprime le fichier
+    $image->delete(); // Supprime l'entrée de la base de données
 
+    return response()->json(['success' => true]);
+}
 
 
 

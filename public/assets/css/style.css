@@ -272,7 +272,14 @@ h3 {
     font-weight: 700;
 }
 
+.dotted-border {
+    border: 2px dotted #ccc; /* couleur et épaisseur de la bordure pointillée */
+    padding: 10px; /* espace intérieur pour les images */
+}
 
+.images-container {
+    margin-bottom: 20px; /* espace en bas du conteneur des images */
+}
 
 
 

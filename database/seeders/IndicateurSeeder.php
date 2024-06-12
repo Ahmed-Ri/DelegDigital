@@ -42,7 +42,7 @@ class IndicateurSeeder extends Seeder
 
         'date'=>$dateSpecifique->format('Y-m-d'),
         'apparitionSite'=>$faker->numberBetween(1,20),
-        'user_id' => rand(1,2),
+        // 'user_id' => rand(1,2),
             ]);
         }
     }

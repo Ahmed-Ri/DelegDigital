@@ -2,14 +2,12 @@
     <header>
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Acceuil') }}
+                <button class="btn btn-primary">Retour</button>
             </x-responsive-nav-link>
         </div>
-        <h2 class="text-lg font-medium text-gray-900">
-            {{ __('Mon compte') }}
-        </h2>
+        
 
-        <p class="mt-1 text-sm text-gray-600">
+        <p class=" text-sm text-gray-600">
             {{ $entreprise }}
         </p>
     </header>
@@ -23,7 +21,7 @@
         @method('patch')
         <h2><b>INFORMATIONS PERSONNELLES</b></h2>
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('Nom')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)"
                 required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
@@ -59,7 +57,7 @@
             <x-input-error class="mt-2" :messages="$errors->get('telephone')" />
         </div>
 
-        <h2><b>INFORMATIONS ENTREPRISE</b></h2>
+        <h2 class="mt-5"><b>INFORMATIONS ENTREPRISE</b></h2>
         <div>
             <x-input-label for="entreprise" :value="__('Entreprise')" />
             <x-text-input id="entreprise" name="entreprise" type="text" class="mt-1 block w-full"
@@ -74,34 +72,34 @@
         </div>
 
         <div>
-            <x-input-label for="telephoneE" :value="__('TelephoneE')" />
+            <x-input-label for="telephoneE" :value="__('Telephone Entreprise')" />
             <x-text-input id="telephoneE" name="telephoneE" type="tel" class="mt-1 block w-full"
                 :value="old('telephoneE', $user->telephoneE)" />
             <x-input-error class="mt-2" :messages="$errors->get('telephoneE')" />
         </div>
-        <h2><b>RESEAUX</b></h2>
+        <h2 class="mt-5"><b>RESEAUX</b></h2>
 
         <div>
-            <x-input-label for="UrlFacebook" :value="__('UrlFacebook')" />
+            <x-input-label for="UrlFacebook" :value="__('Url Facebook')" />
             <x-text-input id="UrlFacebook" name="UrlFacebook" type="text" class="mt-1 block w-full"
                 :value="old('UrlFacebook', $user->UrlFacebook)" />
             <x-input-error class="mt-2" :messages="$errors->get('UrlFacebook')" />
         </div>
 
         <div>
-            <x-input-label for="UrlInstagram" :value="__('UrlInstagram')" />
+            <x-input-label for="UrlInstagram" :value="__('Url Instagram')" />
             <x-text-input id="UrlInstagram" name="UrlInstagram" type="text" class="mt-1 block w-full"
                 :value="old('UrlInstagram', $user->UrlInstagram)" />
             <x-input-error class="mt-2" :messages="$errors->get('UrlInstagram')" />
         </div>
 
         <div>
-            <x-input-label for="UrlGoogle" :value="__('UrlGoogle')" />
+            <x-input-label for="UrlGoogle" :value="__('Url Google')" />
             <x-text-input id="UrlGoogle" name="UrlGoogle" type="text" class="mt-1 block w-full" :value="old('UrlGoogle', $user->UrlGoogle)" />
             <x-input-error class="mt-2" :messages="$errors->get('UrlGoogle')" />
         </div>
         <div>
-            <x-input-label for="UrlSite" :value="__('UrlSite')" />
+            <x-input-label for="UrlSite" :value="__('Url Site')" />
             <x-text-input id="UrlSite" name="UrlSite" type="text" class="mt-1 block w-full" :value="old('UrlSite', $user->UrlSite)" />
             <x-input-error class="mt-2" :messages="$errors->get('UrlSite')" />
         </div>
@@ -110,7 +108,7 @@
 
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>{{ __('Enregistrer') }}</x-primary-button>
 
             @if (session('status') === 'profile-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"

@@ -49,14 +49,14 @@
     <div class="container ">
         <div id="compagnesection">
             <div class="d-flex justify-content-start">
-                <div class="titree">Bonjour {{ $users->name }} </div>
+                <div class="titree mt-2">Bonjour {{ $users->name }} </div>
                 <img src="/assets/image/Slt.png" style="width: 30px; height: 30px;" alt="">
             </div>
             <div style="color: #c2c2c2;">Entreprise {{ $users->entreprise }}</div>
         </div>
-        <div class="card mx-auto mt-4">
+        <div class="card mx-auto mt-2">
             <h2 class="titre mb-2">Mes pages</h2>
-            <div class="swiper mySwiper">
+            <div class="swiper mySwiper" id="myCustomSwiper">
                 <div class="swiper-wrapper">
                     <!-- Swiper Slide for Facebook -->
                     <div class="swiper-slide">
@@ -120,10 +120,10 @@
                     </div>
                 </div>
                 <!-- Add Pagination -->
-                <div class="swiper-pagination"></div>
+                <div class="swiper-pagination "></div>
                 <!-- Add Navigation -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next "></div>
+                <div class="swiper-button-prev my-custom-prev"></div>
+                <div class="swiper-button-next my-custom-prev"></div>
             </div>
         </div>
 
@@ -135,228 +135,179 @@
 
         <div class="card">
             <h2 class="titre">Mes indicateurs</h2>
-            <div class="button-container">
-                <button onclick="showContent('trafic')">Visites</button>
+            <div class="button-container mt-2">
+                <button class="clicked" onclick="showContent('trafic')">Visites</button> <!-- Classe 'clicked' ajoutée ici -->
                 <button onclick="showContent('notes')">Notes</button>
-                <button onclick="showContent('requetes')">Termes</button>
+                <button onclick="showContent('requetes')">Tendances</button>
             </div>
-        
+            
+
             <div style="margin-top: 20px; box-shadow: 1px 2px 4px 1px rgba(0,0,0,0.2);">
-                <div id="traficContent" class="content" style="display: none; padding: 10px;">
+                <div id="traficContent" class="content" style=" padding: 10px;">
                     <canvas id="graphique1"></canvas>
                 </div>
-        
+
                 <div id="notesContent" class="content" style="display: none; padding: 10px;">
                     <canvas id="graphique2"></canvas>
                 </div>
-        
+
                 <div id="requetesContent" class="content" style="display: none; padding: 10px;">
-                    <h2 class="titreterme mb-2">Requete les plus fréquent</h2>
-                    <div>
+                    <div class="term-container">
                         @foreach ($termsArray as $index => $term)
-                            <p class="termes">{{ $term }}</p>
-                            @if ($index < count($termsArray) - 1)
-                                <hr>
-                            @endif
+                            <div>
+                                <p class="termes">{{ $term }}</p>
+                                @if ($index < count($termsArray) - 1)
+                                    <hr>
+                                @endif
+                            </div>
                         @endforeach
                     </div>
                 </div>
+                
             </div>
         </div>
-        
-        
-            <div class="card mx-auto mt-2 mes-compagnes-section">
-                <div class="d-flex justify-content-between align-items-center mb-5">
-                    <h2 class=" titre  ">Mes compagnes</h2>
-                    <div>
-                        <a href="{{ route('formulaire') }}" class="btn mr-2"
-                            style="background-color: #268EE6; color: white; border: none;  cursor: pointer;">+Nouveau</a>
-                        <a href="{{ route('historique') }}" class="btn btn-outline-primary">Historique</a>
-                    </div>
+
+
+        <div class="card mx-auto mt-2 " id="mes-compagnes-section">
+            <div class="compagnes-boutton-responsive ">
+                <h2 class=" titre ">Ma compagne</h2>
+                <div class="compagne_boutton">
+                    <a href="{{ route('formulaire') }}" class="btn mr-2"
+                        style="background-color: #268EE6; color: white; border: none;  cursor: pointer;">+Nouveau</a>
+                    <a href="{{ route('historique') }}" class="btn btn-outline-primary">Historique</a>
                 </div>
-                @if (isset($derniereCompagne))
+            </div>
+            @if (isset($derniereCompagne))
 
-                    <div class="row">
-                        <div class="col-md-8"> <!-- Ajustez la taille de la colonne au besoin -->
-                            <form action="{{ route('update_form', $derniereCompagne->id) }}" method="POST"
-                                enctype="multipart/form-data">
-                                @csrf
-                                @method('PUT') {{-- Directive Blade pour spécifier la méthode PUT --}}
+                <div class="row">
+                    <div class="col-md-8"> <!-- Ajustez la taille de la colonne au besoin -->
+                        <form action="{{ route('update_form', $derniereCompagne->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT') {{-- Directive Blade pour spécifier la méthode PUT --}}
 
-                                {{-- Champ Date de début --}}
-                                <div class="form-group row">
-                                    <label for="date_debut" class="col-sm-4 col-form-label fw-bold text-start">Date de
-                                        début</label>
-                                    <div class="col-sm-8">
-                                        <input type="date" class="form-control" id="date_debut" name="date_debut"
-                                            value="{{ $derniereCompagne->date_debut ?? '' }}" disabled>
-                                    </div>
+                            {{-- Champ Date de début --}}
+                            <div class="form-group row">                                
+                                <div class="col-sm-8">
+                                    <input type="date" class="form-control" id="date_debut" name="date_debut"
+                                           value="{{ $derniereCompagne->date_debut ?? '' }}" disabled
+                                           style="border: 1px solid #ced4da;border-radius: 4px; "> 
                                 </div>
+                            </div>
 
-                                {{-- Champ Date de fin --}}
-                                <div class="form-group row">
-                                    <label for="date_fin" class="col-sm-4 col-form-label fw-bold text-start">Date
-                                        de fin</label>
-                                    <div class="col-sm-8">
-                                        <input type="date" class="form-control" id="date_fin" name="date_fin"
-                                            value="{{ $derniereCompagne->date_fin ?? '' }}" disabled>
-                                    </div>
+                            {{-- Champ Date de fin --}}
+                            {{-- <div class="form-group row">
+                                <label for="date_fin" class="col-sm-4 col-form-label fw-bold text-start">Date
+                                    de fin</label>
+                                <div class="col-sm-8">
+                                    <input type="date" class="form-control" id="date_fin" name="date_fin"
+                                        value="{{ $derniereCompagne->date_fin ?? '' }}" disabled>
                                 </div>
-                                <div class="form-group row">
-                                    <label for="status"
-                                        class="col-sm-4 col-form-label fw-bold text-start">Status</label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control" id="status" name="status" disabled>
-                                            <option value="EnCours"
-                                                {{ $derniereCompagne->status == 'EnCours' ? 'selected' : '' }}>
-                                                En cours</option>
-                                            <option value="publier"
-                                                {{ $derniereCompagne->status == 'publier' ? 'selected' : '' }}>
-                                                Publier</option>
-                                        </select>
-                                    </div>
+                            </div> --}}
+                            {{-- <div class="form-group row">
+                                <label for="status"
+                                    class="col-sm-4 col-form-label fw-bold text-start">Status</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="status" name="status" disabled>
+                                        <option value="EnCours"
+                                            {{ $derniereCompagne->status == 'EnCours' ? 'selected' : '' }}>
+                                            En cours</option>
+                                        <option value="publier"
+                                            {{ $derniereCompagne->status == 'publier' ? 'selected' : '' }}>
+                                            Publier</option>
+                                    </select>
                                 </div>
-                                {{-- Sélecteur Objectif --}}
-                                <div class="form-group row">
-                                    <label for="objectif"
-                                        class="col-sm-4 col-form-label fw-bold text-start">Objectif</label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control" id="objectif" name="objectif" disabled>
-                                            <option value="fidelisation"
-                                                {{ $derniereCompagne->objectif == 'fidelisation' ? 'selected' : '' }}>
-                                                Fidélisation</option>
-                                            <option value="visibilite"
-                                                {{ $derniereCompagne->objectif == 'visibilite' ? 'selected' : '' }}>
-                                                Visibilité</option>
-                                            <option value="notoriete"
-                                                {{ $derniereCompagne->objectif == 'notoriete' ? 'selected' : '' }}>
-                                                Notoriété</option>
-                                        </select>
-                                    </div>
+                            </div> --}}
+                            {{-- Sélecteur Objectif --}}
+                            {{-- <div class="form-group row">
+                                <label for="objectif"
+                                    class="col-sm-4 col-form-label fw-bold text-start">Objectif</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="objectif" name="objectif" disabled>
+                                        <option value="fidelisation"
+                                            {{ $derniereCompagne->objectif == 'fidelisation' ? 'selected' : '' }}>
+                                            Fidélisation</option>
+                                        <option value="visibilite"
+                                            {{ $derniereCompagne->objectif == 'visibilite' ? 'selected' : '' }}>
+                                            Visibilité</option>
+                                        <option value="notoriete"
+                                            {{ $derniereCompagne->objectif == 'notoriete' ? 'selected' : '' }}>
+                                            Notoriété</option>
+                                    </select>
                                 </div>
+                            </div> --}}
 
-                                {{-- Sélecteur Réseaux sociaux --}}
-                                <div class="form-group row">
-                                    <label for="reseaux" class="col-sm-4 col-form-label fw-bold text-start">Réseaux
-                                        sociaux</label>
-                                    <div class="col-sm-8">
-                                        <select class="form-control" id="reseaux" name="reseaux" disabled>
-                                            <option value="facebook"
-                                                {{ $derniereCompagne->reseaux == 'facebook' ? 'selected' : '' }}>
-                                                Facebook</option>
-                                            <option value="instagram"
-                                                {{ $derniereCompagne->reseaux == 'instagram' ? 'selected' : '' }}>
-                                                Instagram</option>
-                                            <option value="google"
-                                                {{ $derniereCompagne->reseaux == 'google' ? 'selected' : '' }}>
-                                                Google</option>
-                                        </select>
-                                    </div>
+                            {{-- Sélecteur Réseaux sociaux --}}
+                            {{-- <div class="form-group row">
+                                <label for="reseaux" class="col-sm-4 col-form-label fw-bold text-start">Réseaux
+                                    sociaux</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" id="reseaux" name="reseaux" disabled>
+                                        <option value="facebook"
+                                            {{ $derniereCompagne->reseaux == 'facebook' ? 'selected' : '' }}>
+                                            Facebook</option>
+                                        <option value="instagram"
+                                            {{ $derniereCompagne->reseaux == 'instagram' ? 'selected' : '' }}>
+                                            Instagram</option>
+                                        <option value="google"
+                                            {{ $derniereCompagne->reseaux == 'google' ? 'selected' : '' }}>
+                                            Google</option>
+                                    </select>
                                 </div>
+                            </div> --}}
 
-                                {{-- Champ Détails --}}
-                                <div class="form-group row">
-                                    <label for="details"
-                                        class="col-sm-4 col-form-label fw-bold text-start">Détails</label>
-                                    <div class="col-sm-8">
-                                        <textarea class="form-control" id="details" name="details" rows="8" disabled>{{ $derniereCompagne->details ?? '' }}</textarea>
-                                    </div>
+                            {{-- Champ Détails --}}
+                            <div class="form-group row">                                
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" id="details" name="details" rows="8" disabled
+                                              style="border: 1px solid #ced4da; ">{{ $derniereCompagne->details ?? '' }}</textarea>
                                 </div>
+                            </div>
 
 
-                                <div class="form-group row images-container">
-                                    <label for="details"
-                                        class="col-sm-4 col-form-label fw-bold text-start">Photos</label>
-                                    {{-- Section pour afficher les images téléchargées --}}
-                                    @if ($derniereImages->isNotEmpty())
-                                        <div class="col-sm-8">
-                                            <div style="border: 2px dotted #ccc; padding: 10px;">
-                                                <div
-                                                    style="display: flex; flex-wrap: wrap; justify-content: flex-end;">
-                                                    @foreach ($derniereImages as $image)
-                                                        <img src="{{ Storage::url($image->filename) }}"
-                                                            alt="Image"
-                                                            style="width: 100px; height: 100px; margin: 10px;">
-                                                    @endforeach
-                                                </div>
+                            <div class="form-group row images-container" >
+                                {{-- <label for="details"
+                                    class="col-sm-4 col-form-label fw-bold text-start">Photos</label> --}}
+                                {{-- Section pour afficher les images téléchargées --}}
+                                @if ($derniereImages->isNotEmpty())
+                                    <div class="col-sm-8">
+                                        <div style="border: 2px dotted #ccc; padding: 10px;" id="images">
+                                            <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                                                @foreach ($derniereImages as $image)
+                                                    <img src="{{ Storage::url($image->filename) }}" alt="Image"
+                                                        style="height: 100px; width: auto; object-fit: cover; margin: 10px;border: 1px solid #ced4da;border-radius: 4px;">
+                                                @endforeach
                                             </div>
                                         </div>
-                                    @else
-                                        {{-- <p>Aucune image disponible pour cette campagne.</p> --}}
-                                    @endif
-                                </div>
+                                    </div>
+                                @else
+                                    {{-- <p>Aucune image disponible pour cette campagne.</p> --}}
+                                @endif
+                            </div>
 
-                            </form>
-                        </div>
-                        <div class="col-md-4">
-                            <!-- Espace pour contenu additionnel ou laissé vide -->
-                        </div>
+                        </form>
                     </div>
-                @else
-                    {{-- <p>Aucune campagne récente trouvée.</p> --}}
-                @endif
-            </div>
-        
-        <div class="card mx-auto mt-3 " id="compagnesection">
-            <h2 class="titre mb-4">Ma compagne en cours</h2>
-            <div class="form-group row">
-
-                <div class="col-sm-8">
-                    <select class="form-control" id="objectif" name="objectif" disabled>
-                        <option value="fidelisation"
-                            {{ $derniereCompagne->objectif == 'fidelisation' ? 'selected' : '' }}>
-                            Fidélisation</option>
-                        <option value="visibilite"
-                            {{ $derniereCompagne->objectif == 'visibilite' ? 'selected' : '' }}>
-                            Visibilité</option>
-                        <option value="notoriete" {{ $derniereCompagne->objectif == 'notoriete' ? 'selected' : '' }}>
-                            Notoriété</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-
-                <div class="col-sm-8">
-                    <input type="date" class="form-control" id="date_debut" name="date_debut"
-                        value="{{ $derniereCompagne->date_debut ?? '' }}" disabled>
-                </div>
-            </div>
-            {{-- Champ Détails --}}
-            <div class="form-group row">
-
-                <div class="col-sm-8">
-                    <textarea class="form-control" id="details" name="details" rows="8" disabled>{{ $derniereCompagne->details ?? '' }}</textarea>
-                </div>
-            </div>
-            <div class="form-group row">
-
-                {{-- Section pour afficher les images téléchargées --}}
-                @if ($derniereImages->isNotEmpty())
-                    <div style="display: flex; flex-wrap: wrap; justify-content: flex-end;">
-                        @foreach ($derniereImages as $image)
-                            <img src="{{ Storage::url($image->filename) }}" alt="Image"
-                                style="width: 100px; height: 100px; margin: 10px;">
-                        @endforeach
+                    <div class="col-md-4">
+                        <!-- Espace pour contenu additionnel ou laissé vide -->
                     </div>
-                @else
-                    <p></p>
-                @endif
-            </div>
-            <div class="d-flex justify-content-end align-items-center">
-                <div class="compagne">
-                    <a href="{{ route('formulaire') }}" class="btn mt-2"
-                        style="background-color: #268EE6; color: white; border: none; cursor: pointer;">+Nouveau</a>
-                    <a href="{{ route('historique') }}" class="btn btn-outline-primary mt-2">Historique</a>
                 </div>
-            </div>
+            @else
+                {{-- <p>Aucune campagne récente trouvée.</p> --}}
+            @endif
         </div>
+
+
+
+
+
+
 
         <div class="card  mx-auto mt-2">
             <h2 class="titre mb-2">Observations de l'expert</h2>
             <h3>Mise à jour du : {{ $Dates }} </h3>
             <div class=" observation">
-                <div style="display: flex; justify-content: center; align-items: center; height: 200px;">
-                    <img src="/assets/image/image 31.png" style="width: 150px; height: 150px;" alt="">
+                <div style="display: flex; justify-content: center; align-items: center; ">
+                    <img src="/assets/image/bonhome.png" style="height: 180px; width: auto; " alt="">
                 </div>
 
                 <div class="card obs" style="height: 200px; text-align: left;color: rgb(156, 156, 156); ">
@@ -366,7 +317,23 @@
         </div>
     </div>
 
-
+    <footer class="footer d-flex justify-content-end">
+        <p class="footer-text mr-2 text-black">Contacter le support</p>
+        <p class="footer-text text-black">|</p>
+        <p class="footer-text ml-2 text-black">Suivez-nous sur</p>
+        <div class="social-media-icons mr-3 ml-3">
+            <a href="https://www.facebook.com/l.assistant.digital.officiel" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/lassistantdigital/" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.linkedin.com/company/l-assistant-digital-com" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </div>
+    </footer>
+    
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -470,7 +437,7 @@
         });
 
 
-        
+
         // Assurez-vous que Chart.js est chargé dans votre page avant ce script
         var ctx = document.getElementById('graphique1').getContext('2d');
         new Chart(ctx, {
@@ -522,12 +489,12 @@
                     legend: {
                         position: 'top',
                     },
-                    title: {
-                        display: true,
-                        text: 'Performance du Trafic ',
-                    }
+                   
                 },
-               
+                animation: {
+            duration: 0 // Désactiver toutes les animations
+        },
+
             },
         });
 
@@ -581,12 +548,12 @@
                     legend: {
                         position: 'top',
                     },
-                    title: {
-                        display: true,
-                        text: 'Performance du Notes',
-                    }
+                  
                 },
-               
+                animation: {
+            duration: 0 // Désactiver toutes les animations
+        },
+
             },
         });
 
@@ -631,20 +598,20 @@
                 // Styles pour les écrans plus petits
                 traficContent.style.flexDirection = 'column';
                 traficContent.style.width = '100%';
-                traficContent.style.height = 'auto';
+                traficContent.style.height = '300px';
 
                 notesContent.style.flexDirection = 'column';
                 notesContent.style.width = '100%';
-                notesContent.style.height = 'auto';
+                notesContent.style.height = '300px';
             } else {
                 // Styles pour les écrans plus larges
                 traficContent.style.flexDirection = 'row';
                 traficContent.style.width = '100%';
-                traficContent.style.height = 'auto';
+                traficContent.style.height = '350px';
 
                 notesContent.style.flexDirection = 'row';
                 notesContent.style.width = '100%';
-                notesContent.style.height = 'auto';
+                notesContent.style.height = '350px';
             }
         }
 

@@ -1,4 +1,15 @@
 /* Style pour le conteneur principal */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Assurez-vous que la barre de navigation est au-dessus des autres contenus */
+    background-color: #268EE6; /* Conserve la couleur de fond spécifiée */
+}
+
+body {
+    padding-top: 54px; /* Ajustez cette valeur en fonction de la hauteur de votre barre de navigation */
+}
 
 .container {
     width: 555px;
@@ -70,8 +81,8 @@ hr {
 }
 .button-container {
     text-align: center;
-    margin-top: 20px; /* Espacement au-dessus des boutons */
-    margin-bottom: 20px;
+     /* Espacement au-dessus des boutons */
+    
 }
 
 .dropzone {
@@ -144,10 +155,65 @@ h3 {
 .observation{
     display: flex;
 }
-/* .fa-star {
-    color: rgb(12, 52, 174) 
+/* #mes-compagnes-section {
+    display: block;
 } */
+#compagnesection {
+    margin-left: 167px;
+     
+}
+#date_debut{
+    width: 400px; /* largeur fixe sur les écrans larges */
+}
+#details{
+    width: 400px;
+}
+#images{
+    width: 400px;
+}
+.compagnes-boutton-responsive{
+    display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+}
+.logo-img {
+    display: block; /* ou tout autre style nécessaire pour le grand écran */
+}
+.footer {
+    width: 100%;
+    margin-top: 50px;
+    bottom: 0;
+    left: 0;
+    background-color: #268EE6; /* Couleur de fond bleue */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.footer .social-media-icons a {
+    color: rgb(255, 255, 255); /* Couleur des icônes */
+    margin: 0 10px; /* Espacement entre les icônes */
+    font-size: 24px; /* Taille des icônes */
+}
+
+.footer .social-media-icons a:hover {
+    color: #565656; /* Couleur au survol des icônes */
+}
+#myCustomSwiper {
+    --swiper-navigation-size: 20px; /* Définissez la taille que vous préférez */
+    color: #333;
+}
+
 @media screen and (max-width: 768px) {
+    .footer-text {
+        display: none; /* Cache les <p> sur les petits écrans */
+    }
+   
+    .logo-img {
+        display: block; /* Assurez-vous que le logo est visible en mode responsive */
+        /* Vous pouvez ajouter d'autres styles ici pour ajuster le logo pour les petits écrans */
+    }
     .pagination-container {
         display: none;
     }
@@ -158,6 +224,25 @@ h3 {
         width: 100%;
         height: 130px;
         min-height: 130px;
+    }
+    #date_debut {
+        width: 100%; /* largeur ajustable sur les petits écrans */
+    }
+    #details{
+        width: 100%;
+    }
+    #images{
+        width: 100%;
+    }
+    #compagnesection {
+        margin-left: 0; 
+    }
+    .compagnes-boutton-responsive{
+        display: block;     
+    }
+    .compagne_boutton{
+margin-top: 17px;
+margin-bottom: -15px;
     }
     /* .sub-card {
         background-color: #fff;
@@ -204,10 +289,22 @@ h3 {
         margin-top: 10px;
         box-shadow: none;
     }
- 
-    .mes-compagnes-section {
-        display: none;
+    .card {
+        width: 100%;
+        height: 100%;
+        margin-left: 0;
+        margin-bottom: 20px;
+    
+        padding: 20px;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+       
+        text-align: center;
     }
+    
+ 
+   
    
   
 }
@@ -223,27 +320,12 @@ h3 {
 .table-responsive {
     display: block;
 }
-
-@media screen and (min-width: 768px) {
-    #compagnesection{
-        display: none;
-    }
+.logo a, .logo a:hover, .logo a:focus {
+    text-decoration: none; /* Supprime le soulignement */
+    border-bottom: none; /* Supprime les bordures en bas */
 }
- @media screen and (max-width: 992px){
-    .card {
-        width: 100%;
-        height: 100%;
-        margin-left: 0;
-        margin-bottom: 20px;
-    
-        padding: 20px;
-        border: 1px solid #ccc;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
-       
-        text-align: center;
-    }
-} 
+
+
  
 .swiper-button-prev, .swiper-button-next {
     
@@ -276,10 +358,27 @@ h3 {
     border: 2px dotted #ccc; /* couleur et épaisseur de la bordure pointillée */
     padding: 10px; /* espace intérieur pour les images */
 }
-
-.images-container {
-    margin-bottom: 20px; /* espace en bas du conteneur des images */
+.term-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Trois colonnes de taille égale */
+    grid-gap: 30px; /* Espace entre les colonnes */
 }
+
+.termes {
+    margin-bottom: 10px; /* Espace en dessous de chaque terme */
+}
+
+.fa-user {
+   
+    color: rgb(255, 255, 255);
+}
+.fa-headset{
+    color: rgb(255, 255, 255); 
+}
+.assistance-icone{
+    display: none;
+}
+
 
 
 

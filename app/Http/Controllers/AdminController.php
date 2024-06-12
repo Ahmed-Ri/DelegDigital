@@ -84,11 +84,6 @@ public function deleteimages($id)
 
 
 
-public function edit($userId)
-{
-    $user = User::findOrFail($userId); // Assurez-vous d'utiliser le modèle User approprié
-    return view('admin.Form_utilisateur', compact('user'));
-}
 
     public function create()
     {
@@ -135,7 +130,7 @@ public function edit($userId)
     $imageFields = ['imageFacebook', 'imageInstagram', 'imageGoogle', 'imageSite'];
     foreach ($imageFields as $imageField) {
         if ($request->hasFile($imageField)) {
-            $path = $request->file($imageField)->store('public/photos');
+            $path = $request->file($imageField)->store('public/images');
             // Convertir le chemin de stockage en URL accessible
             $users->$imageField = Storage::url($path);
         }
@@ -149,6 +144,12 @@ public function edit($userId)
     // Redirection vers une route de votre choix avec un message de succès
     return redirect()->route('admin.dashboard')->with('success', 'Utilisateur ajouté avec succès!');
 }
+public function edit($userId)
+{
+    $user = User::findOrFail($userId); // Assurez-vous d'utiliser le modèle User approprié
+    return view('admin.Form_utilisateur', compact('user'));
+}
+
 public function update(Request $request, $userId)
 {
     // Trouver l'utilisateur en utilisant l'ID
@@ -198,7 +199,7 @@ public function update(Request $request, $userId)
             }
 
             // Sauvegarder la nouvelle image et mettre à jour le champ
-            $path = $request->file($imageField)->store('public/photos');
+            $path = $request->file($imageField)->store('public/images');
             $user->$imageField = Storage::url($path);
         }
     }

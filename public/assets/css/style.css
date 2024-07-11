@@ -1,14 +1,16 @@
 /* Style pour le conteneur principal */
+
 nav {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 1000; /* Assurez-vous que la barre de navigation est au-dessus des autres contenus */
-    background-color: #268EE6; /* Conserve la couleur de fond spécifiée */
+    background-color: #268EE6; 
 }
 
+
 body {
-    padding-top: 54px; /* Ajustez cette valeur en fonction de la hauteur de votre barre de navigation */
+    padding-top: 53px; /* Ajustez cette valeur en fonction de la hauteur de votre barre de navigation */
 }
 
 .container {
@@ -126,9 +128,6 @@ hr {
     background-color: #8fceff; /* Bleu foncé lorsque cliqué */
 }
 
-.content {
-    /* Styles pour le contenu, si nécessaire */
-}
 
 
 h3 {
@@ -137,10 +136,23 @@ h3 {
     color: rgb(92, 79, 62);
 }
 
+
+
+
 .sub-card {
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
+    height: 250px;
+    overflow: hidden;
+    flex: 0 1 auto;
+    min-width: 100px;
+    width: 190px;
+    text-align: center;
+}
+.sub-cardd {
+    background-color: #fff;
+    
     height: 250px;
     overflow: hidden;
     flex: 0 1 auto;
@@ -180,19 +192,22 @@ h3 {
 .logo-img {
     display: block; /* ou tout autre style nécessaire pour le grand écran */
 }
+.container {
+    padding-bottom: 50px; /* Assurez-vous qu'il y a assez d'espace pour le footer */
+}
 .footer {
     width: 100%;
-    margin-top: 50px;
+    position: fixed;
     bottom: 0;
     left: 0;
-    background-color: #268EE6; /* Couleur de fond bleue */
+    background-color: #dfdfdf; /* Couleur de fond bleue */
     color: white;
     text-align: center;
-    padding: 10px 0;
+    padding: 8px 0;
 }
 
 .footer .social-media-icons a {
-    color: rgb(255, 255, 255); /* Couleur des icônes */
+    color: rgb(0, 0, 0); /* Couleur des icônes */
     margin: 0 10px; /* Espacement entre les icônes */
     font-size: 24px; /* Taille des icônes */
 }
@@ -202,12 +217,46 @@ h3 {
 }
 #myCustomSwiper {
     --swiper-navigation-size: 20px; /* Définissez la taille que vous préférez */
-    color: #333;
+   
+}
+.nav-logo {
+    height: 55px;
 }
 
+.term-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Deux colonnes de taille égale */
+    grid-gap: 20px; /* Espace entre les colonnes */
+    justify-items: center; /* Centre horizontalement tous les éléments dans leurs cellules */
+    align-items: center; /* Centre verticalement tous les éléments dans leurs cellules */
+    
+}
+
+.termes {
+    background-color: #194676; /* Bleu Bootstrap par défaut */
+    color: white; /* Texte blanc */
+    border: none; /* Pas de bordure */
+    padding: 7px 10px; /* Padding intérieur */
+    border-radius: 20px; /* Coins arrondis */
+    text-align: center; /* Centrer le texte */
+    
+    text-decoration: none; /* Pas de soulignement pour les liens */
+    display: block; /* Assurez-vous que le bouton prend toute la largeur de la cellule */
+    width: auto; /* S'assurer que la largeur est automatiquement ajustée au contenu */
+}
+.compagne_boutton{
+   
+    text-align: left;
+    
+        }
 @media screen and (max-width: 768px) {
     .footer-text {
         display: none; /* Cache les <p> sur les petits écrans */
+    }
+    .nav-logo {
+        margin-top: 5px;
+        height: 45px;
+        margin-left: -12px;
     }
    
     .logo-img {
@@ -241,26 +290,11 @@ h3 {
         display: block;     
     }
     .compagne_boutton{
-margin-top: 17px;
-margin-bottom: -15px;
+
+
+text-align: left;
     }
-    /* .sub-card {
-        background-color: #fff;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
-        height: auto;  
-        width: 100%;
-        flex: 0 1 auto;      
-        text-align: center;
-        margin-top: 10px;
-       
-        
-    }
-    .subb-card {
-        display: block;
-        gap: 10px;
-        
-    } */
+    
    
 
     .observation{
@@ -283,12 +317,12 @@ margin-bottom: -15px;
     }
     #traficContent ,
     #notesContent {
-        /* Modifier les propriétés CSS pour les petits écrans */
-        /* Par exemple : */
+        
         height: auto;
         margin-top: 10px;
         box-shadow: none;
     }
+   
     .card {
         width: 100%;
         height: 100%;
@@ -303,9 +337,30 @@ margin-bottom: -15px;
         text-align: center;
     }
     
- 
+    .term-container {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr); /* Deux colonnes de taille égale */
+        grid-gap: 10px; /* Espace entre les colonnes */
+        justify-items: center; /* Centre horizontalement tous les éléments dans leurs cellules */
+        align-items: center; /* Centre verticalement tous les éléments dans leurs cellules */
+        
+    }
+    
+    .termes {
+        background-color: #194676; /* Bleu Bootstrap par défaut */
+        color: white; /* Texte blanc */
+        border: none; /* Pas de bordure */
+        padding: 6px 6px; /* Padding intérieur */
+        border-radius: 20px; /* Coins arrondis */
+        text-align: center; /* Centrer le texte */
+        
+        text-decoration: none; /* Pas de soulignement pour les liens */
+        display: block; /* Assurez-vous que le bouton prend toute la largeur de la cellule */
+        width: auto; /* S'assurer que la largeur est automatiquement ajustée au contenu */
+    }
    
-   
+  
+    
   
 }
 .table-responsive .table th {
@@ -358,15 +413,7 @@ margin-bottom: -15px;
     border: 2px dotted #ccc; /* couleur et épaisseur de la bordure pointillée */
     padding: 10px; /* espace intérieur pour les images */
 }
-.term-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Trois colonnes de taille égale */
-    grid-gap: 30px; /* Espace entre les colonnes */
-}
 
-.termes {
-    margin-bottom: 10px; /* Espace en dessous de chaque terme */
-}
 
 .fa-user {
    

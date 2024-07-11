@@ -25,8 +25,10 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
         event(new Registered($user));
-        Auth::login($user);
-        return redirect(RouteServiceProvider::HOME);
+        // Auth::login($user);
+        // return redirect(RouteServiceProvider::HOME);
+        session()->flash('registration_success', 'Merci pour votre inscription! Vous recevrez une confirmation par mail dès que votre inscription sera validée par notre équipe.');
+        return redirect('/login'); 
     }
     /**
      * Display the registration view.

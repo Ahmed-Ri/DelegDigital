@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('imageGoogle')->nullable();
             $table->string('imageSite')->nullable();
             $table->unsignedBigInteger('admin_id')->nullable();
+            $table->string('status')->default('pending');
             $table->rememberToken()->nullable();
             $table->timestamps();
 

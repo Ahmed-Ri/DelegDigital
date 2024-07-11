@@ -10,7 +10,60 @@
 
                         @csrf
                         @method('PUT')
-                        <h2 class="titre mb-4 text-center">Editer compagne</h2>
+                        <h2 class="titre mb-4 text-center">Ma compagne</h2>
+                        <div class="form-group row">
+                            <label for="date_debut" class="col-6 col-form-label fw-bold">Date de début:</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control disable-field" id="date_debut" name="date_debut" required style="border: 1px solid #ced4da; border-radius: 4px; width: 100%;" value="2023-07-01">
+                            </div>
+                        </div>
+    
+                        <div class="form-group row">
+                            <label for="date_fin" class="col-6 col-form-label fw-bold">Date de fin:</label>
+                            <div class="col-sm-8">
+                                <input type="date" class="form-control disable-field" id="date_fin" name="date_fin" required style="border: 1px solid #ced4da; border-radius: 4px;" value="2023-07-31">
+                            </div>
+                        </div>
+
+                    <div class="form-group row">
+                        <label for="status" class="col-6 col-form-label fw-bold">Status:</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="status" name="status" disabled>
+                                <option value="En cours">En cours</option>
+                                <option value="Publier">Publier</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="objectif" class="col-6 col-form-label fw-bold">Objectif:</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="objectif" name="objectif" disabled>
+                                <option value="fidelisation">Fidélisation</option>
+                                <option value="visibilite">Visibilité</option>
+                                <option value="notoriete">Notoriété</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="reseaux" class="col-6 col-form-label fw-bold">Réseaux sociaux:</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="reseaux" name="reseaux" disabled>
+                                <option value="facebook">Facebook</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="google">Google</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="details" class="col-6 col-form-label fw-bold">Détails:</label>
+                        <div class="col-sm-8">
+                            <textarea class="form-control" id="details" name="details" rows="3" style=" width: 100%;" disabled></textarea>
+                        </div>
+                    </div>
+                        {{-- <h2 class="titre mb-4 text-center">Editer compagne</h2>
                         <!-- Date de début -->
                         <div class="form-group row ">
                             <label for="date_debut" class="col-6 col-form-label fw-bold">Date de début:</label>
@@ -87,7 +140,7 @@
                             <div class="col-sm-8 dropzone-previews dropzoneDragArea" style="margin:; padding: 20px; border: 1px dashed #939393; text-align: center; cursor: pointer;">
                                 <span class="text-muted">Cliquer ou glisser les images ici</span>
                             </div>
-                        </div>
+                        </div> --}}
 
                         {{-- Existing Images with delete option --}}
                         <div class="form-group row">
@@ -99,8 +152,8 @@
                                         <img src="{{ Storage::url($image->filename) }}" class="img-fluid img-thumbnail"
                                             style="height: 100px; width: auto; object-fit: cover;">
                         
-                                        <button type="button" class="btn btn-outline-danger mt-2 remove-image"
-                                            data-id="{{ $image->id }}">X</button>
+                                        {{-- <button type="button" class="btn btn-outline-danger mt-2 remove-image"
+                                            data-id="{{ $image->id }}">X</button> --}}
                                     </div>
                                 @empty
                                     <p class="text-center col-12">Aucune image disponible.</p>
@@ -108,15 +161,18 @@
                             </div>
                         </div>
                         
-                        
+                        <div class="form-group" style="text-align: center;">
+                    
+                            <a href="{{ route('historique') }}" class="btn btn-outline-primary">Retour</a>
+                        </div>
 
 
                         <!-- Buttons -->
-                        <div class="form-group" style="text-align: center;">
+                        {{-- <div class="form-group" style="text-align: center;">
                             <button type="submit" class="btn btn-md btn-primary" id="submit-all"
                                 style="background-color: #268EE6; color: white; border: none; cursor: pointer;">Enregistrer</button>
                             <a href="{{ route('dashboard') }}" class="btn btn-outline-primary">Annuler</a>
-                        </div>
+                        </div> --}}
 
                     </form>
                 </div>
@@ -127,6 +183,16 @@
 
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+        // Désactiver les champs de formulaire après le chargement de la page
+        var fields = document.querySelectorAll(".disable-field");
+        fields.forEach(function(field) {
+            field.disabled = true;
+        });
+
+        // Désactiver le bouton de soumission
+        document.getElementById("submit-all").disabled = true;
+    });
         Dropzone.autoDiscover = false; // Empêcher l'auto-découverte
 
         document.addEventListener("DOMContentLoaded", function() {

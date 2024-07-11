@@ -7,7 +7,7 @@
                 <div class="logo space-x-8 text-light fw-bold fs-6 sm:ms-10">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{-- {{ __('Dashboard') }} --}}
-                        <img src="/assets/image/Logoblanc.png" alt="" style="height: 55px">
+                        <img src="/assets/image/Logoblanc.png" class="nav-logo" alt="" >
                     </x-nav-link>
                     {{-- <x-nav-link style="font-size: 20px; font-weight: bold;">
                         <img src="/assets/image/Logoblanc.png" alt="" style="height: 55px">
@@ -15,9 +15,9 @@
                 </div>
             </div>
             <div class="flex items-center">
-                <div class="flex items-center mr-2 ">
+                <div class="flex items-center mr-3 ">
                     <a href="" aria-label="Assistance">
-                        <i class="fas fa-headset"></i>
+                        <i class="fas fa-headset fa-lg"></i>
                     </a>
                 </div>
 
@@ -44,7 +44,7 @@
 
                         <x-slot name="content" >
                             <x-dropdown-link :href="route('profile.edit')" >
-                                {{ __('Profile') }}
+                                {{ __('Profil') }}
                             </x-dropdown-link>
 
                             <!-- Authentication -->
@@ -54,7 +54,7 @@
                                 <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Se déconnecter') }}
                                 </x-dropdown-link>
                             </form>
                         </x-slot>
@@ -65,8 +65,8 @@
                 <!-- Hamburger -->
                 <div class="-me-2 flex items-center sm:hidden">
                     <button @click="open = ! open"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                        <i class="fas fa-user h-8 w-8"></i> <!-- Utilisation de l'icône FontAwesome -->
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500  transition duration-150 ease-in-out">
+                        <i class="fas fa-user h-8 w-8 fa-lg"></i> <!-- Utilisation de l'icône FontAwesome -->
                     </button>
                 </div>
 
@@ -100,7 +100,7 @@
                         <x-responsive-nav-link :href="route('logout')" class="text-white"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                            {{ __('Log Out') }}
+                            {{ __('Se déconnecter') }}
                         </x-responsive-nav-link>
                     </form>
                 </div>

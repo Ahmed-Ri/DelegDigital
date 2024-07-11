@@ -4,13 +4,25 @@
     <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
-
+      <!-- Custom Registration Success Message -->
+      @if (session('registration_success'))
+      <div class="alert alert-success">
+          {{ session('registration_success') }}
+      </div>
+  @endif
+   <!-- Message d'erreur -->
+   @if (session('error'))
+   <div class="alert alert-danger">
+       {{ session('error') }}
+   </div>
+@endif
     <form method="POST" action="{{ route('login') }}" >
         @csrf
 
         <!-- Email Address -->
         
         <img src="/assets/image/LogoCouleur.png" alt="Nom de l'Entreprise" >
+        <h2 class="text-center">Connexion</h2>
         <p class="mb-3 mt-3 text-center">Veuillez rentrez votre login et mot de passe:</p>
         <div>      
             <x-input-label for="email" :value="__('Email')" />
@@ -51,6 +63,8 @@
             </x-primary-button>
             
         </div>
+       
+
         <a class="underline text-sm text-gray-600 hover:text-gray-900 mr-3" href="{{ route('register') }}">
             {{ __("S'inscrire") }}
         </a>

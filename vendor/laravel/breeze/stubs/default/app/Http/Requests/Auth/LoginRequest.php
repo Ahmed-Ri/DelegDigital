@@ -40,15 +40,19 @@ class LoginRequest extends FormRequest
     public function authenticate(): void
     {
         $this->ensureIsNotRateLimited();
-
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+    
+        // Ajout de la condition de statut 'approved'
+        $credentials = $this->only('email', 'password');
+        $credentials['status'] = 'approved'; // Assurez-vous que le modèle User a 'status' comme fillable
+    
+        if (! Auth::attempt($credentials, $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
-
+    
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => [trans('auth.failed')],
             ]);
         }
-
+    
         RateLimiter::clear($this->throttleKey());
     }
 

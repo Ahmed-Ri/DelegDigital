@@ -6,7 +6,7 @@
     
     <form method="POST" action="{{ route('admin.login') }}">
         @csrf
-        <div class="deleg">DledgDigital</div>
+        <div class="deleg">Accés admin</div>
         <p class="mb-5 text-center">Veuillez rentrez votre login et mot de passe:</p>
         <!-- Email Address -->
         <div>

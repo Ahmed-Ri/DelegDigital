@@ -3,13 +3,14 @@
     <link rel="stylesheet" href="{{url('assets/css/style.css')}}">
     <form method="POST" action="{{ route('register') }}">
         @csrf
-        <img src="/assets/image/LogoCouleur.png" alt="Nom de l'Entreprise" >
+        <img src="/assets/image/LogoCouleur.png" alt="Nom de l'Entreprise">
+        <h2 class="text-center">Inscription</h2>
         <p class="mb-3 mt-3 text-center">Veuillez entrer vos informations pour créer un compte :</p>
         <!-- Name -->
         <div>
             <x-input-label for="name" :value="__('Nom')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+            <x-input-error :messages="$errors->get('name')" class="mt-2"/>
         </div>
 
         <!-- Email Address -->

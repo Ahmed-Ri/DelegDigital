@@ -68,9 +68,11 @@
                                 <span class="stars" data-rating="{{ $derniereNoteFacebook }}"></span>
                                 <strong style="font-size: 14px;">({{ $Commentaire_facebook }})</strong>
                             </div>
-                            <a href="{{ $users->UrlFacebook }}" target="_blank">
-                                <img src="{{ asset($users->imageFacebook) }}" alt="Photo">
-                            </a>
+                            @if($users->imageFacebook)
+    <a href="{{ $users->UrlFacebook }}" target="_blank">
+        <img src="{{ asset($users->imageFacebook) }}" alt="Image">
+    </a>
+@endif
                         </div>
                     </div>
                     <!-- Swiper Slide for Instagram -->
@@ -83,9 +85,12 @@
                                 <span class="stars" data-rating="{{ $derniereNoteInstagram }}"></span>
                                 <strong style="font-size: 14px;">({{ $Commentaire_instagram }})</strong>
                             </div>
-                            <a href="{{ $users->UrlInstagram }}" target="_blank">
-                                <img src="{{ asset($users->imageInstagram) }}" alt="Photo">
-                            </a>
+                            
+                            @if($users->imageInstagram)
+    <a href="{{ $users->UrlInstagram }}" target="_blank">
+        <img src="{{ asset($users->imageInstagram) }}" alt="Image">
+    </a>
+@endif
                         </div>
                     </div>
                     <!-- Swiper Slide for Google -->
@@ -98,9 +103,12 @@
                                 <span class="stars" data-rating="{{ $derniereNoteGoogle }}"></span>
                                 <strong style="font-size: 14px;">({{ $Commentaire_google }})</strong>
                             </div>
-                            <a href="{{ $users->UrlGoogle }}" target="_blank">
-                                <img src="{{ asset($users->imageGoogle) }}" alt="Photo">
-                            </a>
+                           
+                            @if($users->imageGoogle)
+    <a href="{{ $users->UrlGoogle }}" target="_blank">
+        <img src="{{ asset($users->imageGoogle) }}" alt="Image">
+    </a>
+@endif
                         </div>
                     </div>
                     <!-- Swiper Slide for Website -->
@@ -113,9 +121,12 @@
                                 <span class="stars" data-rating="{{ $derniereNoteSite }}"></span>
                                 <strong style="font-size: 14px;">({{ $Commentaire_site }})</strong>
                             </div>
+                           
+                            @if($users->imageSite)
                             <a href="{{ $users->UrlInstagram }}" target="_blank">
-                                <img src="{{ asset($users->imageSite) }}" alt="Photo">
+                                <img src="{{ asset($users->imageSite) }}" alt="Image">
                             </a>
+                        @endif
                         </div>
                     </div>
                 </div>
@@ -136,11 +147,12 @@
         <div class="card">
             <h2 class="titre">Mes indicateurs</h2>
             <div class="button-container mt-2">
-                <button class="clicked" onclick="showContent('trafic')">Visites</button> <!-- Classe 'clicked' ajoutée ici -->
+                <button class="clicked" onclick="showContent('trafic')">Visites</button>
+                <!-- Classe 'clicked' ajoutée ici -->
                 <button onclick="showContent('notes')">Notes</button>
                 <button onclick="showContent('requetes')">Tendances</button>
             </div>
-            
+
 
             <div style="margin-top: 20px; box-shadow: 1px 2px 4px 1px rgba(0,0,0,0.2);">
                 <div id="traficContent" class="content" style=" padding: 10px;">
@@ -151,19 +163,37 @@
                     <canvas id="graphique2"></canvas>
                 </div>
 
-                <div id="requetesContent" class="content" style="display: none; padding: 10px;">
-                    <div class="term-container">
+                {{-- <div id="requetesContent" class="content" style="display: none; padding: 20px;">
+                    <div class=" term-container mt-5 ">
                         @foreach ($termsArray as $index => $term)
-                            <div>
+                            <div >
                                 <p class="termes">{{ $term }}</p>
-                                @if ($index < count($termsArray) - 1)
-                                    <hr>
-                                @endif
+
                             </div>
                         @endforeach
                     </div>
+                </div> --}}
+                <div id="requetesContent" class="content" style="display: none; padding: 20px;">
+                    <div class="swiper mySwiper " id="myCustomSwiper">
+                        <div class="swiper-wrapper">
+                            @foreach ($termsArray as $index => $term)
+                                <div class="swiper-slide">
+                                    <div class="sub-cardd d-flex flex-column align-items-center justify-content-center">
+                                        <div class="termes mb-2">{{ $term }}</div>
+                                        <div class="termes mb-2">{{ $term }}</div>
+                                        <div class="termes mb-2">{{ $term }}</div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <!-- Add Pagination -->
+                        <div class="swiper-pagination"></div>
+                        <!-- Add Navigation -->
+                        <div class="swiper-button-prev my-custom-prev"></div>
+                        <div class="swiper-button-next my-custom-prev"></div>
+                    </div>
                 </div>
-                
+
             </div>
         </div>
 
@@ -171,11 +201,7 @@
         <div class="card mx-auto mt-2 " id="mes-compagnes-section">
             <div class="compagnes-boutton-responsive ">
                 <h2 class=" titre ">Ma compagne</h2>
-                <div class="compagne_boutton">
-                    <a href="{{ route('formulaire') }}" class="btn mr-2"
-                        style="background-color: #268EE6; color: white; border: none;  cursor: pointer;">+Nouveau</a>
-                    <a href="{{ route('historique') }}" class="btn btn-outline-primary">Historique</a>
-                </div>
+
             </div>
             @if (isset($derniereCompagne))
 
@@ -187,11 +213,11 @@
                             @method('PUT') {{-- Directive Blade pour spécifier la méthode PUT --}}
 
                             {{-- Champ Date de début --}}
-                            <div class="form-group row">                                
+                            <div class="form-group row">
                                 <div class="col-sm-8">
                                     <input type="date" class="form-control" id="date_debut" name="date_debut"
-                                           value="{{ $derniereCompagne->date_debut ?? '' }}" disabled
-                                           style="border: 1px solid #ced4da;border-radius: 4px; "> 
+                                        value="{{ $derniereCompagne->date_debut ?? '' }}" disabled
+                                        style="border: 1px solid #ced4da;border-radius: 4px; ">
                                 </div>
                             </div>
 
@@ -257,15 +283,15 @@
                             </div> --}}
 
                             {{-- Champ Détails --}}
-                            <div class="form-group row">                                
+                            <div class="form-group row">
                                 <div class="col-sm-8">
                                     <textarea class="form-control" id="details" name="details" rows="8" disabled
-                                              style="border: 1px solid #ced4da; ">{{ $derniereCompagne->details ?? '' }}</textarea>
+                                        style="border: 1px solid #ced4da; ">{{ $derniereCompagne->details ?? '' }}</textarea>
                                 </div>
                             </div>
 
 
-                            <div class="form-group row images-container" >
+                            <div class="form-group row images-container">
                                 {{-- <label for="details"
                                     class="col-sm-4 col-form-label fw-bold text-start">Photos</label> --}}
                                 {{-- Section pour afficher les images téléchargées --}}
@@ -294,6 +320,11 @@
             @else
                 {{-- <p>Aucune campagne récente trouvée.</p> --}}
             @endif
+            <div class="compagne_boutton">
+                <a href="{{ route('formulaire') }}" class="btn mr-2"
+                    style="background-color: #268EE6; color: white; border: none;  cursor: pointer;">+Nouveau</a>
+                <a href="{{ route('historique') }}" class="btn btn-outline-primary">Historique</a>
+            </div>
         </div>
 
 
@@ -304,7 +335,7 @@
 
         <div class="card  mx-auto mt-2">
             <h2 class="titre mb-2">Observations de l'expert</h2>
-            <h3>Mise à jour du : {{ $Dates }} </h3>
+
             <div class=" observation">
                 <div style="display: flex; justify-content: center; align-items: center; ">
                     <img src="/assets/image/bonhome.png" style="height: 180px; width: auto; " alt="">
@@ -314,32 +345,43 @@
                     {{ $Observation }}
                 </div>
             </div>
+            <h3>Mise à jour du : {{ $Dates }} </h3>
         </div>
     </div>
 
-    <footer class="footer d-flex justify-content-end">
-        <p class="footer-text mr-2 text-black">Contacter le support</p>
-        <p class="footer-text text-black">|</p>
-        <p class="footer-text ml-2 text-black">Suivez-nous sur</p>
-        <div class="social-media-icons mr-3 ml-3">
-            <a href="https://www.facebook.com/l.assistant.digital.officiel" target="_blank" aria-label="Facebook">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://www.instagram.com/lassistantdigital/" target="_blank" aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.linkedin.com/company/l-assistant-digital-com" target="_blank" aria-label="LinkedIn">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-        </div>
-    </footer>
-    
+
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
     <script>
+        var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1, // Défaut pour les grands écrans
+        spaceBetween: 10, // Espace entre les slides
+        observer: true, // Permet à Swiper de s'adapter aux changements DOM
+        observeParents: true,
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        breakpoints: {
+            // Active Swiper seulement à partir de 768px et en dessous
+            768: {
+                slidesPerView: 4,
+                spaceBetween: 10
+            },
+            600: {
+                slidesPerView: 2,
+                spaceBetween: 20
+            },
+            320: {
+                slidesPerView: 1,
+                spaceBetween: 10
+            }
+        }
+    });
         var mySwiper = new Swiper('.mySwiper', {
             direction: 'horizontal',
             loop: true,
@@ -489,11 +531,11 @@
                     legend: {
                         position: 'top',
                     },
-                   
+
                 },
                 animation: {
-            duration: 0 // Désactiver toutes les animations
-        },
+                    duration: 0 // Désactiver toutes les animations
+                },
 
             },
         });
@@ -548,11 +590,11 @@
                     legend: {
                         position: 'top',
                     },
-                  
+
                 },
                 animation: {
-            duration: 0 // Désactiver toutes les animations
-        },
+                    duration: 0 // Désactiver toutes les animations
+                },
 
             },
         });
@@ -592,6 +634,7 @@
         function adjustStylesForMobile() {
             var traficContent = document.getElementById('traficContent');
             var notesContent = document.getElementById('notesContent');
+            var requetesContent = document.getElementById('requetesContent');
 
             // Vérifie si la largeur de l'écran est inférieure ou égale à 720px
             if (window.innerWidth <= 720) {
@@ -603,6 +646,10 @@
                 notesContent.style.flexDirection = 'column';
                 notesContent.style.width = '100%';
                 notesContent.style.height = '300px';
+
+                requetesContent.style.flexDirection = 'column';
+                requetesContent.style.width = '100%';
+                requetesContent.style.height = '300px';
             } else {
                 // Styles pour les écrans plus larges
                 traficContent.style.flexDirection = 'row';
@@ -612,6 +659,10 @@
                 notesContent.style.flexDirection = 'row';
                 notesContent.style.width = '100%';
                 notesContent.style.height = '350px';
+
+                requetesContent.style.flexDirection = 'row';
+                requetesContent.style.width = '100%';
+                requetesContent.style.height = '350px';
             }
         }
 

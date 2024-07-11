@@ -6,10 +6,10 @@
             </x-responsive-nav-link>
         </div>
         
-
-        <p class=" text-sm text-gray-600">
+        <h1 class="display-6">MON PROFIL</h1>
+        {{-- <p class=" text-sm text-gray-600">
             {{ $entreprise }}
-        </p>
+        </p> --}}
     </header>
 
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
@@ -19,7 +19,7 @@
     <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
-        <h2><b>INFORMATIONS PERSONNELLES</b></h2>
+        <h2 ><b>INFORMATIONS PERSONNELLES</b></h2>
         <div>
             <x-input-label for="name" :value="__('Nom')" />
             <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)"
@@ -80,26 +80,26 @@
         <h2 class="mt-5"><b>RESEAUX</b></h2>
 
         <div>
-            <x-input-label for="UrlFacebook" :value="__('Url Facebook')" />
+            <x-input-label for="UrlFacebook" :value="__('Facebook')" />
             <x-text-input id="UrlFacebook" name="UrlFacebook" type="text" class="mt-1 block w-full"
                 :value="old('UrlFacebook', $user->UrlFacebook)" />
             <x-input-error class="mt-2" :messages="$errors->get('UrlFacebook')" />
         </div>
 
         <div>
-            <x-input-label for="UrlInstagram" :value="__('Url Instagram')" />
+            <x-input-label for="UrlInstagram" :value="__('Instagram')" />
             <x-text-input id="UrlInstagram" name="UrlInstagram" type="text" class="mt-1 block w-full"
                 :value="old('UrlInstagram', $user->UrlInstagram)" />
             <x-input-error class="mt-2" :messages="$errors->get('UrlInstagram')" />
         </div>
 
         <div>
-            <x-input-label for="UrlGoogle" :value="__('Url Google')" />
+            <x-input-label for="UrlGoogle" :value="__('Google')" />
             <x-text-input id="UrlGoogle" name="UrlGoogle" type="text" class="mt-1 block w-full" :value="old('UrlGoogle', $user->UrlGoogle)" />
             <x-input-error class="mt-2" :messages="$errors->get('UrlGoogle')" />
         </div>
         <div>
-            <x-input-label for="UrlSite" :value="__('Url Site')" />
+            <x-input-label for="UrlSite" :value="__('Site')" />
             <x-text-input id="UrlSite" name="UrlSite" type="text" class="mt-1 block w-full" :value="old('UrlSite', $user->UrlSite)" />
             <x-input-error class="mt-2" :messages="$errors->get('UrlSite')" />
         </div>

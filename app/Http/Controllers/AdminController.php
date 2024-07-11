@@ -172,6 +172,7 @@ public function update(Request $request, $userId)
         'imageInstagram' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'imageGoogle' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         'imageSite' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+         'status' => 'required|in:pendant,vérifié'
     ]);
 
     // Mise à jour des champs utilisateur
@@ -188,6 +189,7 @@ public function update(Request $request, $userId)
     $user->UrlInstagram = $request->UrlInstagram;
     $user->UrlGoogle = $request->UrlGoogle;
     $user->abonnement = $request->abonnement;
+    $user->status = $request->status;
 
     // Gérer les uploads d'images et mettre à jour les champs correspondants
     $imageFields = ['imageFacebook', 'imageInstagram', 'imageGoogle', 'imageSite'];

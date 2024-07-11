@@ -19,26 +19,35 @@ use App\Models\User;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+require __DIR__.'/auth.php';
 Route::get('/', function () {
     return view('auth.login');
 });
+Route::middleware(['auth', 'verified', 'checkuserstatus'])->group(function () {
+    Route::get('/dashboard', [ChartController::class, 'afficherGraphique'])->name('dashboard');
+Route::get('/formulaire', [UserController::class, 'indexForm'])->name('formulaire');
+Route::post('/formulaire', [UserController::class, 'store'])->name('sauvegarder_donnees');
+Route::get('/historique', [UserController::class, 'indexHistorique'])->name('historique');
+Route::delete('/delete-image/{id}', [UserController::class, 'deleteImage'])->name('delete_image');
+// creation et modification compagnes utilisateur
+Route::get('/formulaire/edit/{id}', [UserController::class, 'editCompagne'])->name('edit_form');
+Route::put('/formulaire/update/{id}', [UserController::class, 'updateCompagne'])->name('update_form');
+Route::delete('/delete_image/{id}', [UserController::class, 'deleteimage'])->name('delete-image');
 
-Route::get('/dashboard', function () {
-    
-    
-        return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    // Ajoutez d'autres routes protégées nécessitant un statut approuvé ici
+});
+
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+
+    
+
 
 
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -46,7 +55,7 @@ Route::middleware('auth')->group(function () {
     // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 
-require __DIR__.'/auth.php';
+
 
 Route::get('/admin/dashboard', function () {
     $users = User::all(); // Récupérer tous les utilisateurs
@@ -59,18 +68,6 @@ require __DIR__.'/adminauth.php';
 
 // Route::get('/historiques', [AdminController::class, 'indexForms'])->name('admin_historique');
 
-Route::get('/formulaire', [UserController::class, 'indexForm'])->name('formulaire');
-Route::post('/formulaire', [UserController::class, 'store'])->name('sauvegarder_donnees');
-Route::get('/historique', [UserController::class, 'indexHistorique'])->name('historique');
-Route::delete('/delete-image/{id}', [UserController::class, 'deleteImage'])->name('delete_image');
-// creation et modification compagnes utilisateur
-Route::get('/formulaire/edit/{id}', [UserController::class, 'editCompagne'])->name('edit_form');
-Route::put('/formulaire/update/{id}', [UserController::class, 'updateCompagne'])->name('update_form');
-
-
-
-
-Route::get('/dashboard', [ChartController::class, 'afficherGraphique'])->name('dashboard')->middleware(['auth', 'verified']);
 
 
 
@@ -78,7 +75,7 @@ Route::get('/dashboard', [ChartController::class, 'afficherGraphique'])->name('d
 // creation et modification utilisateur
 Route::get('/utilisateur/create', [AdminController::class, 'create'])->name('utilisateur.create');
 Route::post('/utilisateur/store', [AdminController::class, 'storeAdmin'])->name('utilisateur.store');
-Route::delete('/delete_image/{id}', [UserController::class, 'deleteimage'])->name('delete-image');
+
 // creation et modification compagnes admin
 Route::get('/compagnes/edit/{id}', [AdminController::class, 'editCompagne'])->name('edit-compagne');
 Route::put('/compagnes/update/{id}', [AdminController::class, 'updateCompagne'])->name('update-compagne');

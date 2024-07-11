@@ -59,6 +59,7 @@
                         <th>Abonnement</th>
                         <th>Téléphone</th>
                         <th>Mot de passe</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -70,9 +71,10 @@
                             <td>{{ $user->abonnement }}</td>
                             <td>{{ $user->telephone }}</td>
                             <td>**********</td>
+                            <td>{{ $user->status }}</td>
                             <td>
                                 <a href="{{ route('users.edit', $user->id) }}" class="btn"
-                                   style="background-color: #268EE6; color: white; border: none; cursor: pointer;">Voir</a>
+                                   style="background-color: #268EE6; color: white; border: none; cursor: pointer;">Editer</a>
                             </td>
                         </tr> @endforeach
                 </tbody>
@@ -124,7 +126,7 @@
                         <td>{{ $compagne->status }}</td>
                         <td>
                             <a href="{{ route('edit-compagne', $compagne->id) }}" class="btn "
-                                style="background-color: #268EE6; color: white; border: none; cursor: pointer;">Éditer</a>
+                                style="background-color: #268EE6; color: white; border: none; cursor: pointer;">Editer</a>
                         </td>
                     </tr>
                 @endforeach

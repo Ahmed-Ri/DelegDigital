@@ -88,8 +88,9 @@ class ChartController extends Controller
             $note_google = $months->pluck('note_google');
             $note_site = $months->pluck('note_site');
             // Traitement des termes
-        $terms = Indicateur::where('user_id', $userId)->pluck('termes')->last();
-        $termsArray = explode(',', $terms);
+            $terms = Indicateur::where('user_id', $userId)->pluck('termes')->last();
+            $termsArray = array_slice(explode(',', $terms), 0, 9);
+            
 
         return view('dashboard', compact('termsArray','Dates','Observation','Commentaire_site','Commentaire_google','Commentaire_instagram','Commentaire_facebook','derniereTraficFacebook','derniereImages','derniereTraficInstagram','derniereTraficGoogle','derniereTraficSite', 'derniereNoteFacebook', 'derniereNoteInstagram', 'derniereNoteGoogle', 'derniereNoteSite','labels', 'indicateurs', 'users','compagnes','derniereCompagne' ,'traficFacebook', 'traficInstagram', 'traficGoogle', 'traficSite', 'note_facebook', 'note_instagram', 'note_google', 'note_site'));
     }

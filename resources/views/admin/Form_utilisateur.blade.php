@@ -127,6 +127,17 @@
                                 <input type="text" class="form-control" id="abonnement" name="abonnement" value="{{ $user->abonnement }}">
                             </div>
                         </div>
+                        
+                        <!-- Ajout de la sélection de statut -->
+                        <div class="form-group row">
+                            <label for="status" class="col-md-3 col-form-label fw-bold">Demandes</label>
+                            <div class="col-md-9">
+                                <select id="status" name="status" class="form-control">
+                                    <option value="pendant" {{ $user->status == 'pendant' ? 'selected' : '' }}>pendant</option>
+                                    <option value="vérifié" {{ $user->status == 'vérifié' ? 'selected' : '' }}>Vérifié</option>
+                                </select>
+                            </div>
+                        </div>
     
                         <div class="form-group row">
                             <div class="col-md-9 offset-md-3">
@@ -138,6 +149,7 @@
             </div>
         </div>
     </div>
+    
     
 </body>
 
